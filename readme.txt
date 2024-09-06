@@ -91,71 +91,6 @@ git pull <remote_name> <branch_name>
     - 将<remote_name>替换为远程仓库的名称，将<branch_name>替换为要获取的分支的名称。通过指定远程仓库和分支名称，将远程仓库的最新更改获取到本地仓库，但不自动合并到当前分支。也可以直接git fetch 获取到当前的仓库分支。
 git fetch <remote_name> <branch_name>
   
-  Git 分支管理
-  分支管理在Git中是非常重要的，它允许并行开发不同的功能或修复bug，并帮助团队高效协作。下面将介绍如何创建、切换、合并和删除分支，并介绍常见的分支管理策略，以及简要介绍git cherry-pick命令。
-  
-  1. 创建分支： 使用git branch命令来创建新的分支。
-  
-  创建一个新分支：
-  
-  git branch <branch_name>
-  1
-  将 <branch_name>替换为新分支的名称。这个命令会在当前所在的提交上创建一个新的分支，但不会切换到新分支。
-  
-  2. 切换分支： 使用git checkout命令或git switch命令来切换到已存在的分支。
-  
-  切换到已存在的分支：
-  
-  git checkout <branch_name>
-  1
-  或
-  
-  git switch <branch_name>
-  1
-  将<branch_name>替换为要切换到的分支名称。这个命令会将工作目录切换到指定的分支，并将HEAD指向该分支。switch为Git2.23以上版本才有的，是为了更清晰的见名知意。
-  
-  3. 合并分支： 使用git merge命令来合并指定分支到当前分支。
-  
-  将指定分支合并到当前分支：
-  
-  git merge <branch_name>
-  1
-  将<branch_name>替换为要合并到当前分支的分支名称。合并会将指定分支的更改合并到当前分支。
-  
-  git cherry-pick命令： git cherry-pick命令用于将指定的提交（commit）应用到当前分支，它允许你选择性地将某个提交应用到当前分支，而不是进行整个分支的合并。
-  
-  使用git cherry-pick命令：
-  
-  git cherry-pick <commit_hash>
-  1
-  将<commit_hash>替换为要应用的提交的哈希值（可以通过git log 查看）。这个命令会将指定提交的更改应用到当前分支。
-  
-  git cherry-pick commit-hash //提交这次本地更改
-  
-  git cherry-pick <A> <B> //A和B都提交
-  
-  git cherry-pick A..B //从 A 到 B 的所有提交,不包括A
-  
-  git cherry-pick A^..B //从 A 到 B 的所有提交,包括A
-  1
-  2
-  3
-  4
-  5
-  6
-  7
-  4. 删除分支： 使用git branch命令来删除已存在的分支。
-  
-  删除一个已存在的分支：
-  
-  git branch -d <branch_name>
-  1
-  将<branch_name>替换为要删除的分支名称。这个命令会删除指定的分支。
-  ————————————————
-  
-                              版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
-                          
-  原文链接：https://blog.csdn.net/yw_WillGo/article/details/131519101
 2.5 Git分支管理
 2.5.1 创建分支
     -  使用git branch命令来创建新的分支。
@@ -210,6 +145,7 @@ branch_name
     - 在Git中，可以使用以下命令来撤销提交、回退到之前的提交状态或恢复删除的文件。
     - 需要注意的是，撤销提交和回退提交是不同的操作。git revert会创建一个新的提交，以撤销指定提交的更改，而git reset会移动HEAD指针丢弃部分或全部的提交。
     - 通过git log 命令可以查看从最近到最远的提交日志，每次提交都有唯一的commit hash（版本号），我们进行版本回退时，要用到这个commit hash
+    - 如果回退后又想再次回到之前的版本，使用git reflog命令查看所有分支的所有操作记录（包括commit和reset），包括已被删除的commit记录
 2.6.1 撤销提交
     - 使用git revert命令来合并指定分支到当前分支。
     - 将<commit_hash>替换为要撤销的提交的哈希值。这个命令会创建一个新的提交，以撤销指定提交的更改。
@@ -224,6 +160,8 @@ git reset <commit_hash>
 git restore <file_path>
   
   
+  
+
 3. 常见问题
 3.1 常见问题和对应的故障排除技巧
 3.1.1 修复损坏的仓库
