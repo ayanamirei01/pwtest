@@ -183,7 +183,3 @@ git restore <file_path>
     - 如果需要撤销提交，可以使用git revert或git reset命令进行撤销或回退操作。
 
 添加一行内容
-
-再次修改
-
-第三次修改
